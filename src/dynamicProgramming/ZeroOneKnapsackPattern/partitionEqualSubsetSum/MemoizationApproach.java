@@ -21,23 +21,23 @@ public class MemoizationApproach {
         return helper(nums, n - 1, target);
     }
 
-    private boolean helper(int[] nums, int index, int sum) {
+    private boolean helper(int[] nums, int n, int sum) {
         // Base cases
         if (sum == 0) 
             return true;
-        if (index < 0 || sum < 0) 
+        if (n < 0 || sum < 0) 
             return false;
 
         // If already computed, return the stored result
-        if (memo[index][sum] != null) 
-            return memo[index][sum];
+        if (memo[n][sum] != null) 
+            return memo[n][sum];
 
         // Choice to include or exclude the current item
-        boolean include = helper(nums, index - 1, sum - nums[index]);
-        boolean exclude = helper(nums, index - 1, sum);
+        boolean include = helper(nums, n - 1, sum - nums[n]);
+        boolean exclude = helper(nums, n - 1, sum);
 
         // Store the result in the memo table
-        memo[index][sum] = include || exclude;
-        return memo[index][sum];
+        memo[n][sum] = include || exclude;
+        return memo[n][sum];
     }
 }
